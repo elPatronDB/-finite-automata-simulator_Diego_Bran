@@ -32,7 +32,7 @@ class AutomatonValidator:
         if not self.config.initial_state:
             raise AutomatonError("Missing initial state in Automaton JSON")
         
-        if self.config.initial_state not in self.config.states
+        if self.config.initial_state not in self.config.states:
             raise AutomatonError("Oh no! The initial state is not in states")
         
         # Validación de los estados de aceptación
@@ -51,7 +51,7 @@ class AutomatonValidator:
             if transition.from_state not in self.config.states:
                 raise AutomatonError(f"Transition is not in states")
             
-            if transition.to_state not in self.config.states or transition.to_state == not in self.config.states:
+            if transition.to_state not in self.config.states:
                 raise AutomatonError(f"Transition state is not in states")
             
             if transition.symbol not in self.config.alphabet:
@@ -64,6 +64,6 @@ class AutomatonValidator:
                 if not any(t.from_state == state and t.symbol == symbol for t in self.config.transitions):
                     raise AutomatonError(f"A Transition is missing for state and symbol")
         
-        
+
             
             
