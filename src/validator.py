@@ -1,7 +1,6 @@
 from pydantic import BaseModel, ValidationError
 from typing import List, Set
 
-
 class AutomatonError(Exception):
     pass
 
@@ -45,8 +44,7 @@ class AutomatonValidator:
         if not self.config.states:
             raise AutomatonError("The states are empty")
         
-        
-        #Ciclo para validar las transiciones
+        # Ciclo para validar las transiciones
         for transition in self.config.transitions:
             if transition.from_state not in self.config.states:
                 raise AutomatonError(f"Transition is not in states")
@@ -57,13 +55,8 @@ class AutomatonValidator:
             if transition.symbol not in self.config.alphabet:
                 raise AutomatonError(f"Transition symbol not in alphabet")
 
-            
-        # Ciclo para validad transiciones completas - Asegura que cada estado debe tener una transición
+        # Ciclo para validar transiciones completas - Asegura que cada estado debe tener una transición
         for state in self.config.states:
             for symbol in self.config.alphabet:
                 if not any(t.from_state == state and t.symbol == symbol for t in self.config.transitions):
                     raise AutomatonError(f"A Transition is missing for state and symbol")
-        
-
-            
-            
